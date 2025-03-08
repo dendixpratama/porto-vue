@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porto Dendi Pratama</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tambahkan Font Awesome untuk icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas></canvas>
+    
+    <div class="navbar">
+        <button id="modeToggle" onclick="toggleMode()">
+            <span id="darkIcon">🌙</span>
+            <span id="lightIcon">☀️</span>
+        </button>
+    </div>
+    
+    <div id="app">
+        <section id="about">
+            <h2><span id="typed-name"></span></h2>
+            <p>{{ description }}</p>
+        </section>
+        
+        <section id="projects">
+            <h2>Project Saya</h2>
+            
+            <!-- Filter proyek berdasarkan kategori -->
+            <div class="filter-buttons">
+                <button @click="filterProjects('all')" :class="{ active: currentFilter === 'all' }">Semua</button>
+                <button @click="filterProjects('web')" :class="{ active: currentFilter === 'web' }">Web</button>
+                <button @click="filterProjects('web dashboard')" :class="{ active: currentFilter === 'web dashboard' }">Dashboard</button>
+                <button @click="filterProjects('other')" :class="{ active: currentFilter === 'other' }">Lainnya</button>
+            </div>
+            
+            <div class="projects">
+                <div v-for="project in filteredProjects" :key="project.id" class="project-card">
+                    <!-- Pattern overlay -->
+                    <div class="card-pattern-grid"></div>
+                    <div class="card-overlay-dots"></div>
+                    
+                    <!-- Accent shape for design -->
+                    <div class="bold-pattern">
+                        <svg viewBox="0 0 100 100">
+                            <path
+                                stroke-dasharray="15 10"
+                                stroke-width="10"
+                                stroke="#000"
+                                fill="none"
+                                d="M0,0 L100,0 L100,100 L0,100 Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Title area with tag -->
+                    <div class="card-title-area">
+                        <span>{{ project.title }}</span>
+                        <span class="card-tag">{{ project.category }}</span>
+                    </div>
+                    
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Project image -->
+                        <div class="image-container">
+                            <img :src="project.image" :alt="project.title" class="project-image">
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="card-description">
+                            {{ project.description }}
+                        </div>
+                        
+                        <!-- Features/Technologies -->
+                        <div class="feature-grid">
+                            <div v-for="tech in project.technologies" :key="tech" class="feature-item">
+                                <div class="feature-icon">
+                                    <i :class="getTechIcon(tech)"></i>
+                                </div>
+                                <span class="feature-text">{{ tech }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="card-actions">
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i> {{ project.date }}
+                            </div>
+                            
+                            <div class="card-buttons">
+                                <a :href="project.github" class="card-button github-btn">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a :href="project.link" class="card-button">
+                                    <i class="fas fa-eye"></i> Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="dots-pattern">
+                        <svg viewBox="0 0 80 40">
+                            <circle fill="#000" r="3" cy="10" cx="10"></circle>
+                            <circle fill="#000" r="3" cy="10" cx="30"></circle>
+                            <circle fill="#000" r="3" cy="10" cx="50"></circle>
+                            <circle fill="#000" r="3" cy="10" cx="70"></circle>
+                            <circle fill="#000" r="3" cy="20" cx="20"></circle>
+                            <circle fill="#000" r="3" cy="20" cx="40"></circle>
+                            <circle fill="#000" r="3" cy="20" cx="60"></circle>
+                            <circle fill="#000" r="3" cy="30" cx="10"></circle>
+                            <circle fill="#000" r="3" cy="30" cx="30"></circle>
+                            <circle fill="#000" r="3" cy="30" cx="50"></circle>
+                            <circle fill="#000" r="3" cy="30" cx="70"></circle>
+                        </svg>
+                    </div>
+                    
+                    <div class="accent-shape"></div>
+                    <div class="corner-slice"></div>
+                </div>
+            </div>
+            
+            <!-- Pagination jika proyek banyak -->
+            <div class="pagination" v-if="totalPages > 1">
+                <button @click="prevPage" :disabled="currentPage === 1"><i class="fas fa-chevron-left"></i></button>
+                <span>{{ currentPage }} / {{ totalPages }}</span>
+                <button @click="nextPage" :disabled="currentPage === totalPages"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact">
+            <h2>Let's Connect</h2>
+            <div class="contact-links">
+                <p>
+                    <a :href="'mailto:' + email">
+                        <i class="fas fa-envelope"></i> {{ email }}
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.linkedin.com/in/dendi-pratama-589b2a205/" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.instagram.com/dendiipratamaa" target="_blank">
+                        <i class="fab fa-instagram"></i> @dendiipratamaa
+                    </a>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script src="stars.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
