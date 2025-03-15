@@ -264,3 +264,11 @@ function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+// Loading screen logic
+window.addEventListener('load', function() {
+    // Hide loading screen after everything is loaded
+    setTimeout(function() {
+        document.getElementById('loading-screen').classList.add('fade-out');
+        document.getElementById('app').classList.remove('loading');
+    }, 2500); // Menampilkan loading selama 2.5 detik agar animasi astronot terlihat
+});
