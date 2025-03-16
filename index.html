@@ -1,573 +1,649 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Porto Dendi Pratama</title>
     <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <!-- Tambahkan Font Awesome untuk icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        /* Style untuk loading screen dengan astronot */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #121212;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-            overflow: hidden;
-        }
-        
-        .loader-text {
-            margin-top: 300px;
-            color: #fff;
-            font-size: 18px;
-            letter-spacing: 2px;
-            z-index: 15;
-        }
-        
-        .fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        /* Hide content initially */
-        #app.loading {
-            display: none;
-        }
-        
-        /* Animasi astronot dan bintang */
-        @keyframes snow {
-            0% {
-                opacity: 0;
-                transform: translateY(0px);
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(650px);
-            }
-        }
+      /* Style untuk loading screen dengan astronot */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #121212;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+        overflow: hidden;
+      }
 
-        @keyframes astronaut {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+      .loader-text {
+        margin-top: 300px;
+        color: #fff;
+        font-size: 18px;
+        letter-spacing: 2px;
+        z-index: 15;
+      }
 
-        .box-of-star1,
-        .box-of-star2,
-        .box-of-star3,
-        .box-of-star4 {
-            width: 100%;
-            position: absolute;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            transform: translateY(0px);
-            height: 700px;
-        }
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-        .box-of-star1 {
-            animation: snow 5s linear infinite;
-        }
+      /* Hide content initially */
+      #app.loading {
+        display: none;
+      }
 
-        .box-of-star2 {
-            animation: snow 5s -1.64s linear infinite;
+      /* Animasi astronot dan bintang */
+      @keyframes snow {
+        0% {
+          opacity: 0;
+          transform: translateY(0px);
         }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(650px);
+        }
+      }
 
-        .box-of-star3 {
-            animation: snow 5s -2.30s linear infinite;
+      @keyframes astronaut {
+        0% {
+          transform: rotate(0deg);
         }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-        .box-of-star4 {
-            animation: snow 5s -3.30s linear infinite;
-        }
+      .box-of-star1,
+      .box-of-star2,
+      .box-of-star3,
+      .box-of-star4 {
+        width: 100%;
+        position: absolute;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        transform: translateY(0px);
+        height: 700px;
+      }
 
-        .star {
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background-color: #FFF;
-            position: absolute;
-            z-index: 10;
-            opacity: 0.7;
-        }
+      .box-of-star1 {
+        animation: snow 5s linear infinite;
+      }
 
-        .star:before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #FFF;
-            position: absolute;
-            z-index: 10;
-            top: 80px;
-            left: 70px;
-            opacity: .7;
-        }
+      .box-of-star2 {
+        animation: snow 5s -1.64s linear infinite;
+      }
 
-        .star:after {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #FFF;
-            position: absolute;
-            z-index: 10;
-            top: 8px;
-            left: 170px;
-            opacity: .9;
-        }
+      .box-of-star3 {
+        animation: snow 5s -2.3s linear infinite;
+      }
 
-        .star-position1 {
-            top: 30px;
-            left: 20px;
-        }
+      .box-of-star4 {
+        animation: snow 5s -3.3s linear infinite;
+      }
 
-        .star-position2 {
-            top: 110px;
-            left: 250px;
-        }
+      .star {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        z-index: 10;
+        opacity: 0.7;
+      }
 
-        .star-position3 {
-            top: 60px;
-            left: 570px;
-        }
+      .star:before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        z-index: 10;
+        top: 80px;
+        left: 70px;
+        opacity: 0.7;
+      }
 
-        .star-position4 {
-            top: 120px;
-            left: 900px;
-        }
+      .star:after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        z-index: 10;
+        top: 8px;
+        left: 170px;
+        opacity: 0.9;
+      }
 
-        .star-position5 {
-            top: 20px;
-            left: 1120px;
-        }
+      .star-position1 {
+        top: 30px;
+        left: 20px;
+      }
 
-        .star-position6 {
-            top: 90px;
-            left: 1280px;
-        }
+      .star-position2 {
+        top: 110px;
+        left: 250px;
+      }
 
-        .star-position7 {
-            top: 30px;
-            left: 1480px;
-        }
+      .star-position3 {
+        top: 60px;
+        left: 570px;
+      }
 
-        .astronaut {
-            width: 250px;
-            height: 300px;
-            position: absolute;
-            z-index: 11;
-            top: calc(50% - 150px);
-            left: calc(50% - 125px);
-            animation: astronaut 5s linear infinite;
-        }
+      .star-position4 {
+        top: 120px;
+        left: 900px;
+      }
 
-        .schoolbag {
-            width: 100px;
-            height: 150px;
-            position: absolute;
-            z-index: 1;
-            top: calc(50% - 75px);
-            left: calc(50% - 50px);
-            background-color: #94b7ca;
-            border-radius: 50px 50px 0 0 / 30px 30px 0 0;
-        }
+      .star-position5 {
+        top: 20px;
+        left: 1120px;
+      }
 
-        .head {
-            width: 97px;
-            height: 80px;
-            position: absolute;
-            z-index: 3;
-            background: -webkit-linear-gradient(left, #e3e8eb 0%, #e3e8eb 50%, #fbfdfa 50%, #fbfdfa 100%);
-            border-radius: 50%;
-            top: 34px;
-            left: calc(50% - 47.5px);
-        }
+      .star-position6 {
+        top: 90px;
+        left: 1280px;
+      }
 
-        .head:after {
-            content: "";
-            width: 60px;
-            height: 50px;
-            position: absolute;
-            top: calc(50% - 25px);
-            left: calc(50% - 30px);
-            background: -webkit-linear-gradient(top, #15aece 0%, #15aece 50%, #0391bf 50%, #0391bf 100%);
-            border-radius: 15px;
-        }
+      .star-position7 {
+        top: 30px;
+        left: 1480px;
+      }
 
-        .head:before {
-            content: "";
-            width: 12px;
-            height: 25px;
-            position: absolute;
-            top: calc(50% - 12.5px);
-            left: -4px;
-            background-color: #618095;
-            border-radius: 5px;
-            box-shadow: 92px 0px 0px #618095;
-        }
+      .astronaut {
+        width: 250px;
+        height: 300px;
+        position: absolute;
+        z-index: 11;
+        top: calc(50% - 150px);
+        left: calc(50% - 125px);
+        animation: astronaut 5s linear infinite;
+      }
 
-        .body {
-            width: 85px;
-            height: 100px;
-            position: absolute;
-            z-index: 2;
-            background-color: #fffbff;
-            border-radius: 40px / 20px;
-            top: 105px;
-            left: calc(50% - 41px);
-            background: -webkit-linear-gradient(left, #e3e8eb 0%, #e3e8eb 50%, #fbfdfa 50%, #fbfdfa 100%);
-        }
+      .schoolbag {
+        width: 100px;
+        height: 150px;
+        position: absolute;
+        z-index: 1;
+        top: calc(50% - 75px);
+        left: calc(50% - 50px);
+        background-color: #94b7ca;
+        border-radius: 50px 50px 0 0 / 30px 30px 0 0;
+      }
 
-        .panel {
-            width: 60px;
-            height: 40px;
-            position: absolute;
-            top: 20px;
-            left: calc(50% - 30px);
-            background-color: #b7cceb;
-        }
+      .head {
+        width: 97px;
+        height: 80px;
+        position: absolute;
+        z-index: 3;
+        background: -webkit-linear-gradient(
+          left,
+          #e3e8eb 0%,
+          #e3e8eb 50%,
+          #fbfdfa 50%,
+          #fbfdfa 100%
+        );
+        border-radius: 50%;
+        top: 34px;
+        left: calc(50% - 47.5px);
+      }
 
-        .panel:before {
-            content: "";
-            width: 30px;
-            height: 5px;
-            position: absolute;
-            top: 9px;
-            left: 7px;
-            background-color: #fbfdfa;
-            box-shadow: 0px 9px 0px #fbfdfa, 0px 18px 0px #fbfdfa;
-        }
+      .head:after {
+        content: "";
+        width: 60px;
+        height: 50px;
+        position: absolute;
+        top: calc(50% - 25px);
+        left: calc(50% - 30px);
+        background: -webkit-linear-gradient(
+          top,
+          #15aece 0%,
+          #15aece 50%,
+          #0391bf 50%,
+          #0391bf 100%
+        );
+        border-radius: 15px;
+      }
 
-        .panel:after {
-            content: "";
-            width: 8px;
-            height: 8px;
-            position: absolute;
-            top: 9px;
-            right: 7px;
-            background-color: #fbfdfa;
-            border-radius: 50%;
-            box-shadow: 0px 14px 0px 2px #fbfdfa;
-        }
+      .head:before {
+        content: "";
+        width: 12px;
+        height: 25px;
+        position: absolute;
+        top: calc(50% - 12.5px);
+        left: -4px;
+        background-color: #618095;
+        border-radius: 5px;
+        box-shadow: 92px 0px 0px #618095;
+      }
 
-        .arm {
-            width: 80px;
-            height: 30px;
-            position: absolute;
-            top: 121px;
-            z-index: 2;
-        }
+      .body {
+        width: 85px;
+        height: 100px;
+        position: absolute;
+        z-index: 2;
+        background-color: #fffbff;
+        border-radius: 40px / 20px;
+        top: 105px;
+        left: calc(50% - 41px);
+        background: -webkit-linear-gradient(
+          left,
+          #e3e8eb 0%,
+          #e3e8eb 50%,
+          #fbfdfa 50%,
+          #fbfdfa 100%
+        );
+      }
 
-        .arm-left {
-            left: 30px;
-            background-color: #e3e8eb;
-            border-radius: 0 0 0 39px;
-        }
+      .panel {
+        width: 60px;
+        height: 40px;
+        position: absolute;
+        top: 20px;
+        left: calc(50% - 30px);
+        background-color: #b7cceb;
+      }
 
-        .arm-right {
-            right: 30px;
-            background-color: #fbfdfa;
-            border-radius: 0 0 39px 0;
-        }
+      .panel:before {
+        content: "";
+        width: 30px;
+        height: 5px;
+        position: absolute;
+        top: 9px;
+        left: 7px;
+        background-color: #fbfdfa;
+        box-shadow: 0px 9px 0px #fbfdfa, 0px 18px 0px #fbfdfa;
+      }
 
-        .arm-left:before,
-        .arm-right:before {
-            content: "";
-            width: 30px;
-            height: 70px;
-            position: absolute;
-            top: -40px;
-        }
+      .panel:after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 9px;
+        right: 7px;
+        background-color: #fbfdfa;
+        border-radius: 50%;
+        box-shadow: 0px 14px 0px 2px #fbfdfa;
+      }
 
-        .arm-left:before {
-            border-radius: 50px 50px 0px 120px / 50px 50px 0 110px;
-            left: 0;
-            background-color: #e3e8eb;
-        }
+      .arm {
+        width: 80px;
+        height: 30px;
+        position: absolute;
+        top: 121px;
+        z-index: 2;
+      }
 
-        .arm-right:before {
-            border-radius: 50px 50px 120px 0 / 50px 50px 110px 0;
-            right: 0;
-            background-color: #fbfdfa;
-        }
+      .arm-left {
+        left: 30px;
+        background-color: #e3e8eb;
+        border-radius: 0 0 0 39px;
+      }
 
-        .arm-left:after,
-        .arm-right:after {
-            content: "";
-            width: 30px;
-            height: 10px;
-            position: absolute;
-            top: -24px;
-        }
+      .arm-right {
+        right: 30px;
+        background-color: #fbfdfa;
+        border-radius: 0 0 39px 0;
+      }
 
-        .arm-left:after {
-            background-color: #6e91a4;
-            left: 0;
-        }
+      .arm-left:before,
+      .arm-right:before {
+        content: "";
+        width: 30px;
+        height: 70px;
+        position: absolute;
+        top: -40px;
+      }
 
-        .arm-right:after {
-            right: 0;
-            background-color: #b6d2e0;
-        }
+      .arm-left:before {
+        border-radius: 50px 50px 0px 120px / 50px 50px 0 110px;
+        left: 0;
+        background-color: #e3e8eb;
+      }
 
-        .leg {
-            width: 30px;
-            height: 40px;
-            position: absolute;
-            z-index: 2;
-            bottom: 70px;
-        }
+      .arm-right:before {
+        border-radius: 50px 50px 120px 0 / 50px 50px 110px 0;
+        right: 0;
+        background-color: #fbfdfa;
+      }
 
-        .leg-left {
-            left: 76px;
-            background-color: #e3e8eb;
-            transform: rotate(20deg);
-        }
+      .arm-left:after,
+      .arm-right:after {
+        content: "";
+        width: 30px;
+        height: 10px;
+        position: absolute;
+        top: -24px;
+      }
 
-        .leg-right {
-            right: 73px;
-            background-color: #fbfdfa;
-            transform: rotate(-20deg);
-        }
+      .arm-left:after {
+        background-color: #6e91a4;
+        left: 0;
+      }
 
-        .leg-left:before,
-        .leg-right:before {
-            content: "";
-            width: 50px;
-            height: 25px;
-            position: absolute;
-            bottom: -26px;
-        }
+      .arm-right:after {
+        right: 0;
+        background-color: #b6d2e0;
+      }
 
-        .leg-left:before {
-            left: -20px;
-            background-color: #e3e8eb;
-            border-radius: 30px 0 0 0;
-            border-bottom: 10px solid #6d96ac;
-        }
+      .leg {
+        width: 30px;
+        height: 40px;
+        position: absolute;
+        z-index: 2;
+        bottom: 70px;
+      }
 
-        .leg-right:before {
-            right: -20px;
-            background-color: #fbfdfa;
-            border-radius: 0 30px 0 0;
-            border-bottom: 10px solid #b0cfe4;
-        }
+      .leg-left {
+        left: 76px;
+        background-color: #e3e8eb;
+        transform: rotate(20deg);
+      }
+
+      .leg-right {
+        right: 73px;
+        background-color: #fbfdfa;
+        transform: rotate(-20deg);
+      }
+
+      .leg-left:before,
+      .leg-right:before {
+        content: "";
+        width: 50px;
+        height: 25px;
+        position: absolute;
+        bottom: -26px;
+      }
+
+      .leg-left:before {
+        left: -20px;
+        background-color: #e3e8eb;
+        border-radius: 30px 0 0 0;
+        border-bottom: 10px solid #6d96ac;
+      }
+
+      .leg-right:before {
+        right: -20px;
+        background-color: #fbfdfa;
+        border-radius: 0 30px 0 0;
+        border-bottom: 10px solid #b0cfe4;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Loading Screen dengan Astronot -->
     <div id="loading-screen">
-        <div class="box-of-star1">
-            <div class="star star-position1"></div>
-            <div class="star star-position2"></div>
-            <div class="star star-position3"></div>
-            <div class="star star-position4"></div>
-            <div class="star star-position5"></div>
-            <div class="star star-position6"></div>
-            <div class="star star-position7"></div>
+      <div class="box-of-star1">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star2">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star3">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star4">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="astronaut">
+        <div class="head"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="body">
+          <div class="panel"></div>
         </div>
-        <div class="box-of-star2">
-            <div class="star star-position1"></div>
-            <div class="star star-position2"></div>
-            <div class="star star-position3"></div>
-            <div class="star star-position4"></div>
-            <div class="star star-position5"></div>
-            <div class="star star-position6"></div>
-            <div class="star star-position7"></div>
-        </div>
-        <div class="box-of-star3">
-            <div class="star star-position1"></div>
-            <div class="star star-position2"></div>
-            <div class="star star-position3"></div>
-            <div class="star star-position4"></div>
-            <div class="star star-position5"></div>
-            <div class="star star-position6"></div>
-            <div class="star star-position7"></div>
-        </div>
-        <div class="box-of-star4">
-            <div class="star star-position1"></div>
-            <div class="star star-position2"></div>
-            <div class="star star-position3"></div>
-            <div class="star star-position4"></div>
-            <div class="star star-position5"></div>
-            <div class="star star-position6"></div>
-            <div class="star star-position7"></div>
-        </div>
-        <div class="astronaut">
-            <div class="head"></div>
-            <div class="arm arm-left"></div>
-            <div class="arm arm-right"></div>
-            <div class="body">
-                <div class="panel"></div>
-            </div>
-            <div class="leg leg-left"></div>
-            <div class="leg leg-right"></div>
-            <div class="schoolbag"></div>
-        </div>
-        <div class="loader-text">Loading...</div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="schoolbag"></div>
+      </div>
+      <div class="loader-text">Loading...</div>
     </div>
-    
+
     <canvas></canvas>
-    
+
     <div class="navbar">
-        <button id="modeToggle" onclick="toggleMode()">
-            <span id="darkIcon">🌙</span>
-            <span id="lightIcon">☀️</span>
+      <!-- Logo di sebelah kiri -->
+      <div class="navbar-logo">
+        <a href="#" class="logo">DD</a>
+      </div>
+
+      <!-- Pilihan bahasa di tengah -->
+      <div class="navbar-language">
+        <button class="language-btn active" onclick="changeLanguage('id')">
+          ID
         </button>
+        <span class="language-separator">|</span>
+        <button class="language-btn" onclick="changeLanguage('en')">EN</button>
+      </div>
+
+      <!-- Dark/Light mode di sebelah kanan -->
+      <button id="modeToggle" onclick="toggleMode()">
+        <span id="darkIcon">🌙</span>
+        <span id="lightIcon">☀️</span>
+      </button>
     </div>
-    
+
     <div id="app" class="loading">
-        <section id="about">
-            <h2><span id="typed-name"></span></h2>
-            <p>{{ description }}</p>
-        </section>
-        
-        <section id="projects">
-            <h2>Project Saya</h2>
-            
-            <!-- Filter proyek berdasarkan kategori -->
-            <div class="filter-buttons">
-                <button @click="filterProjects('all')" :class="{ active: currentFilter === 'all' }">Semua</button>
-                <button @click="filterProjects('web')" :class="{ active: currentFilter === 'web' }">Web</button>
-                <button @click="filterProjects('web dashboard')" :class="{ active: currentFilter === 'web dashboard' }">Dashboard</button>
-                <button @click="filterProjects('other')" :class="{ active: currentFilter === 'other' }">Lainnya</button>
+      <section id="about">
+        <h2><span id="typed-name"></span></h2>
+        <p>{{ currentDescription }}</p>
+      </section>
+
+      <section id="projects">
+        <h2>{{ currentLangText.projects }}</h2>
+
+        <!-- Filter proyek berdasarkan kategori -->
+        <div class="filter-buttons">
+          <button
+            @click="filterProjects('all')"
+            :class="{ active: currentFilter === 'all' }"
+          >
+            {{ currentLangText.filters.all }}
+          </button>
+          <button
+            @click="filterProjects('web')"
+            :class="{ active: currentFilter === 'web' }"
+          >
+            {{ currentLangText.filters.web }}
+          </button>
+          <button
+            @click="filterProjects('web dashboard')"
+            :class="{ active: currentFilter === 'web dashboard' }"
+          >
+            {{ currentLangText.filters.dashboard }}
+          </button>
+          <button
+            @click="filterProjects('other')"
+            :class="{ active: currentFilter === 'other' }"
+          >
+            {{ currentLangText.filters.all === 'All' ? 'Other' : 'Lainnya' }}
+          </button>
+        </div>
+
+        <div class="projects">
+          <div
+            v-for="project in filteredProjects"
+            :key="project.id"
+            class="project-card"
+          >
+            <!-- Pattern overlay -->
+            <div class="card-pattern-grid"></div>
+            <div class="card-overlay-dots"></div>
+
+            <!-- Accent shape for design -->
+            <div class="bold-pattern">
+              <svg viewBox="0 0 100 100">
+                <path
+                  stroke-dasharray="15 10"
+                  stroke-width="10"
+                  stroke="#000"
+                  fill="none"
+                  d="M0,0 L100,0 L100,100 L0,100 Z"
+                ></path>
+              </svg>
             </div>
-            
-            <div class="projects">
-                <div v-for="project in filteredProjects" :key="project.id" class="project-card">
-                    <!-- Pattern overlay -->
-                    <div class="card-pattern-grid"></div>
-                    <div class="card-overlay-dots"></div>
-                    
-                    <!-- Accent shape for design -->
-                    <div class="bold-pattern">
-                        <svg viewBox="0 0 100 100">
-                            <path
-                                stroke-dasharray="15 10"
-                                stroke-width="10"
-                                stroke="#000"
-                                fill="none"
-                                d="M0,0 L100,0 L100,100 L0,100 Z"
-                            ></path>
-                        </svg>
-                    </div>
-                    
-                    <!-- Title area with tag -->
-                    <div class="card-title-area">
-                        <span>{{ project.title }}</span>
-                        <span class="card-tag">{{ project.category }}</span>
-                    </div>
-                    
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Project image -->
-                        <div class="image-container">
-                            <img :src="project.image" :alt="project.title" class="project-image">
-                        </div>
-                        
-                        <!-- Description -->
-                        <div class="card-description">
-                            {{ project.description }}
-                        </div>
-                        
-                        <!-- Features/Technologies -->
-                        <div class="feature-grid">
-                            <div v-for="tech in project.technologies" :key="tech" class="feature-item">
-                                <div class="feature-icon">
-                                    <i :class="getTechIcon(tech)"></i>
-                                </div>
-                                <span class="feature-text">{{ tech }}</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="card-actions">
-                            <div class="date">
-                                <i class="far fa-calendar-alt"></i> {{ project.date }}
-                            </div>
-                            
-                            <div class="card-buttons">
-                                <a :href="project.github" class="card-button github-btn">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a :href="project.link" class="card-button">
-                                    <i class="fas fa-eye"></i> Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Decorative elements -->
-                    <div class="dots-pattern">
-                        <svg viewBox="0 0 80 40">
-                            <circle fill="#000" r="3" cy="10" cx="10"></circle>
-                            <circle fill="#000" r="3" cy="10" cx="30"></circle>
-                            <circle fill="#000" r="3" cy="10" cx="50"></circle>
-                            <circle fill="#000" r="3" cy="10" cx="70"></circle>
-                            <circle fill="#000" r="3" cy="20" cx="20"></circle>
-                            <circle fill="#000" r="3" cy="20" cx="40"></circle>
-                            <circle fill="#000" r="3" cy="20" cx="60"></circle>
-                            <circle fill="#000" r="3" cy="30" cx="10"></circle>
-                            <circle fill="#000" r="3" cy="30" cx="30"></circle>
-                            <circle fill="#000" r="3" cy="30" cx="50"></circle>
-                            <circle fill="#000" r="3" cy="30" cx="70"></circle>
-                        </svg>
-                    </div>
-                    
-                    <div class="accent-shape"></div>
-                    <div class="corner-slice"></div>
+
+            <!-- Title area with tag -->
+            <div class="card-title-area">
+              <span>{{ getProjectTitle(project) }}</span>
+              <span class="card-tag">{{ project.category }}</span>
+            </div>
+
+            <!-- Card body -->
+            <div class="card-body">
+              <!-- Project image -->
+              <div class="image-container">
+                <img
+                  :src="project.image"
+                  :alt="project.title"
+                  class="project-image"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="card-description">
+                {{ getProjectDescription(project) }}
+              </div>
+
+              <!-- Features/Technologies -->
+              <div class="feature-grid">
+                <div
+                  v-for="tech in project.technologies"
+                  :key="tech"
+                  class="feature-item"
+                >
+                  <div class="feature-icon">
+                    <i :class="getTechIcon(tech)"></i>
+                  </div>
+                  <span class="feature-text">{{ tech }}</span>
                 </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="card-actions">
+                <div class="date">
+                  <i class="far fa-calendar-alt"></i> {{ getProjectDate(project)
+                  }}
+                </div>
+
+                <div class="card-buttons">
+                  <a :href="project.github" class="card-button github-btn">
+                    <i class="fab fa-github"></i> {{ currentLangText.viewCode }}
+                  </a>
+                  <a :href="project.link" class="card-button">
+                    <i class="fas fa-eye"></i> {{ currentLangText.viewProject }}
+                  </a>
+                </div>
+              </div>
             </div>
-            
-            <!-- Pagination jika proyek banyak -->
-            <div class="pagination" v-if="totalPages > 1">
-                <button @click="prevPage" :disabled="currentPage === 1"><i class="fas fa-chevron-left"></i></button>
-                <span>{{ currentPage }} / {{ totalPages }}</span>
-                <button @click="nextPage" :disabled="currentPage === totalPages"><i class="fas fa-chevron-right"></i></button>
+
+            <!-- Decorative elements -->
+            <div class="dots-pattern">
+              <svg viewBox="0 0 80 40">
+                <circle fill="#000" r="3" cy="10" cx="10"></circle>
+                <circle fill="#000" r="3" cy="10" cx="30"></circle>
+                <circle fill="#000" r="3" cy="10" cx="50"></circle>
+                <circle fill="#000" r="3" cy="10" cx="70"></circle>
+                <circle fill="#000" r="3" cy="20" cx="20"></circle>
+                <circle fill="#000" r="3" cy="20" cx="40"></circle>
+                <circle fill="#000" r="3" cy="20" cx="60"></circle>
+                <circle fill="#000" r="3" cy="30" cx="10"></circle>
+                <circle fill="#000" r="3" cy="30" cx="30"></circle>
+                <circle fill="#000" r="3" cy="30" cx="50"></circle>
+                <circle fill="#000" r="3" cy="30" cx="70"></circle>
+              </svg>
             </div>
-        </section>
-        
-        <section id="contact" class="contact">
-            <h2>Let's Connect</h2>
-            <div class="contact-links">
-                <p>
-                    <a :href="'mailto:' + email">
-                        <i class="fas fa-envelope"></i> {{ email }}
-                    </a>
-                </p>
-                <p>
-                    <a href="https://www.linkedin.com/in/dendi-pratama-589b2a205/" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                </p>
-                <p>
-                    <a href="https://www.instagram.com/dendiipratamaa" target="_blank">
-                        <i class="fab fa-instagram"></i> @dendiipratamaa
-                    </a>
-                </p>
-            </div>
-        </section>
+
+            <div class="accent-shape"></div>
+            <div class="corner-slice"></div>
+          </div>
+        </div>
+
+        <!-- Pagination jika proyek banyak -->
+        <div class="pagination" v-if="totalPages > 1">
+          <button @click="prevPage" :disabled="currentPage === 1">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span>{{ currentPage }} / {{ totalPages }}</span>
+          <button @click="nextPage" :disabled="currentPage === totalPages">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2>{{ currentLangText.contact }}</h2>
+        <div class="contact-links">
+          <p>
+            <a :href="'mailto:' + email">
+              <i class="fas fa-envelope"></i> {{ email }}
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://www.linkedin.com/in/dendi-pratama-589b2a205/"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </p>
+          <p>
+            <a href="https://www.instagram.com/dendiipratamaa" target="_blank">
+              <i class="fab fa-instagram"></i> @dendiipratamaa
+            </a>
+          </p>
+        </div>
+      </section>
     </div>
 
     <script src="stars.js"></script>
     <script src="app.js" defer></script>
-</body>
+  </body>
 </html>

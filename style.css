@@ -42,52 +42,184 @@ body {
     height: 100%;
     z-index: -1;
   }
-  
+  /* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+body.light-mode .navbar {
+  background-color: rgba(245, 245, 245, 0.8);
+}
+
+/* Logo di sebelah kiri */
+.navbar-logo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #f5f5f5;
+  padding: 0.5rem;
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+body.light-mode .logo {
+  color: #333;
+  border-color: #333;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode .logo:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Language switcher di tengah */
+.navbar-language {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  color: rgba(245, 245, 245, 0.7);
+  transition: all 0.3s ease;
+}
+
+.language-btn.active {
+  color: #f5f5f5;
+  font-weight: 700;
+}
+
+body.light-mode .language-btn {
+  color: rgba(51, 51, 51, 0.7);
+}
+
+body.light-mode .language-btn.active {
+  color: #333;
+}
+
+.language-btn:hover {
+  transform: translateY(-2px);
+}
+
+.language-separator {
+  margin: 0 0.5rem;
+  color: rgba(245, 245, 245, 0.7);
+}
+
+body.light-mode .language-separator {
+  color: rgba(51, 51, 51, 0.7);
+}
+
+/* Mode toggle di sebelah kanan */
+.navbar-mode {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg);
+}
+
+/* Tampilan untuk ikon mode */
+#darkIcon, #lightIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+/* Default: tampilkan ikon gelap, sembunyikan ikon terang */
+#lightIcon {
+  display: none;
+}
+
+/* Style untuk mode terang */
+body.light-mode #darkIcon {
+  display: none;
+}
+
+body.light-mode #lightIcon {
+  display: block;
+}
+
+/* Tambahkan padding-top untuk konten agar tidak tertutup navbar */
+#app {
+  padding-top: 70px;
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
   .navbar {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+    padding: 0.3rem;
+  }
+  
+  .language-btn {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.3rem;
+  }
+  
+  .language-separator {
+    margin: 0 0.3rem;
   }
   
   .navbar button {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    position: relative;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
-  
-  .navbar button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(45deg);
-  }
-  
-  /* Tampilan untuk ikon mode */
-  #darkIcon, #lightIcon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
-  }
-  
-  /* Default: tampilkan ikon gelap, sembunyikan ikon terang */
-  #lightIcon {
-    display: none;
-  }
-  
-  /* Style untuk mode terang */
-  body.light-mode #darkIcon {
-    display: none;
-  }
-  
-  body.light-mode #lightIcon {
-    display: block;
-  }
+}
   
   section {
     max-width: 1200px;

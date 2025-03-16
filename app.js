@@ -2,83 +2,155 @@
 const app = Vue.createApp({
     data() {
         return {
+            language: 'id', // Default language set to Indonesian
             title: 'Porto Dendi Pratama',
-            description: 'Software Engineer dengan pengalaman dalam membangun aplikasi web modern dan responsif. Spesialisasi dalam Vue.js, Laravel, dan teknologi frontend lainnya.',
+            description: {
+                id: 'Software Engineer dengan pengalaman dalam membangun aplikasi web modern dan responsif. Spesialisasi dalam Vue.js, Laravel, dan teknologi frontend lainnya.',
+                en: 'Software Engineer with experience in building modern and responsive web applications. Specializing in Vue.js, Laravel, and other frontend technologies.'
+            },
             email: 'dendixpratama@gmail.com',
             projects: [
                 {
                     id: 1,
-                    title: 'Izin Konstruksi',
-                    description: 'Website profile company dalam pengurusan perizinan di sektor konstruksi',
+                    title: {
+                        id: 'Izin Konstruksi',
+                        en: 'Construction Permit'
+                    },
+                    description: {
+                        id: 'Website profile company dalam pengurusan perizinan di sektor konstruksi',
+                        en: 'Company profile website for construction sector permit management'
+                    },
                     image: '/images/izinkonstruksi.png',
                     link: 'https://izinkonstruksi.com/',
                     github: '#',
                     technologies: ['Laravel', 'HTML5', 'Bootstrap', 'SQLite'],
-                    date: 'Oktober 2024',
+                    date: {
+                        id: 'Oktober 2024',
+                        en: 'October 2024'
+                    },
                     category: 'web'
                 },
                 {
                     id: 2,
                     title: 'BEWIZE by BSI',
-                    description: 'Website ini adalah one-stop solution bagi para penggunanya untuk melakukan segala transaksi keuangan seperi Cash Management System, Digital Value Chain dan lain sebagainya.',
+                    description: {
+                        id: 'Website ini adalah one-stop solution bagi para penggunanya untuk melakukan segala transaksi keuangan seperi Cash Management System, Digital Value Chain dan lain sebagainya.',
+                        en: 'This website is a one-stop solution for users to perform all financial transactions such as Cash Management System, Digital Value Chain, and more.'
+                    },
                     image: '/images/bewize.png',
                     link: 'https://bewize.bankbsi.co.id/site/login',
                     github: '#',
                     technologies: ['PHP', 'Bootstrap', 'Javascript', 'Oracle'],
-                    date: 'Live & Maintaining',
+                    date: {
+                        id: 'Live & Maintaining',
+                        en: 'Live & Maintaining'
+                    },
                     category: 'web dashboard'
                 },
                 {
                     id: 3,
-                    title: 'Izin Kesehatan',
-                    description: 'Website ini merupakan profile company di bidang perizinan sektor kesehatan.',
+                    title: {
+                        id: 'Izin Kesehatan',
+                        en: 'Health Permit'
+                    },
+                    description: {
+                        id: 'Website ini merupakan profile company di bidang perizinan sektor kesehatan.',
+                        en: 'This website is a company profile in the health sector permitting field.'
+                    },
                     image: '/images/izinkesehatan.png',
                     link: 'https://project3.example.com',
                     github: 'https://github.com/username/project3',
                     technologies: ['Laravel', 'Bootstrap', 'Javascript', 'SQLite'],
-                    date: 'Januari 2025',
+                    date: {
+                        id: 'Januari 2025',
+                        en: 'January 2025'
+                    },
                     category: 'web'
                 },
                 {
                     id: 4,
                     title: 'Rifal Architecture',
-                    description: 'Website profile company dan portofolio dari Rifal Architecture',
+                    description: {
+                        id: 'Website profile company dan portofolio dari Rifal Architecture',
+                        en: 'Company profile website and portfolio for Rifal Architecture'
+                    },
                     image: '/images/rifalarchitect.png',
                     link: 'https://project4.example.com',
                     github: '#',
                     technologies: ['Vue.js', 'HTML5', 'SQLite', 'Tailwind CSS'],
-                    date: 'Oct 2021',
+                    date: {
+                        id: 'Oktober 2021',
+                        en: 'October 2021'
+                    },
                     category: 'web'
-                },
-                // {
-                //     id: 5,
-                //     title: 'Portfolio Website',
-                //     description: 'Website portfolio personal dengan animasi interaktif dan tampilan responsif.',
-                //     image: 'https://via.placeholder.com/600x400?text=Portfolio+Project',
-                //     link: 'https://project5.example.com',
-                //     github: 'https://github.com/username/project5',
-                //     technologies: ['HTML/CSS', 'JavaScript', 'GSAP', 'Three.js'],
-                //     date: 'Agustus 2024',
-                //     category: 'web'
-                // },
-                // {
-                //     id: 6,
-                //     title: 'Fitness Tracker',
-                //     description: 'Aplikasi pelacak kebugaran dengan visualisasi kemajuan dan pembuatan rencana latihan.',
-                //     image: 'https://via.placeholder.com/600x400?text=Fitness+App+Project',
-                //     link: 'https://project6.example.com',
-                //     github: 'https://github.com/username/project6',
-                //     technologies: ['Flutter', 'Firebase', 'Google Fit API'],
-                //     date: 'September 2024',
-                //     category: 'mobile'
-                // }
+                }
             ],
+            uiText: {
+                id: {
+                    home: 'Beranda',
+                    about: 'Tentang',
+                    projects: 'Project',
+                    contact: 'Kontak',
+                    filters: {
+                        all: 'Semua',
+                        web: 'Web',
+                        mobile: 'Mobile',
+                        dashboard: 'Dashboard'
+                    },
+                    viewProject: 'Demo',
+                    viewCode: 'Code',
+                    prev: 'Sebelumnya',
+                    next: 'Selanjutnya',
+                    contactForm: {
+                        name: 'Nama',
+                        email: 'Email',
+                        message: 'Pesan',
+                        send: 'Kirim Pesan',
+                        required: 'Semua bidang harus diisi!',
+                        invalidEmail: 'Email tidak valid!',
+                        success: 'Pesan Anda telah dikirim!'
+                    }
+                },
+                en: {
+                    home: 'Home',
+                    about: 'About',
+                    projects: 'Projects',
+                    contact: 'Contact',
+                    filters: {
+                        all: 'All',
+                        web: 'Web',
+                        mobile: 'Mobile',
+                        dashboard: 'Dashboard'
+                    },
+                    viewProject: 'Demo',
+                    viewCode: 'Code',
+                    prev: 'Previous',
+                    next: 'Next',
+                    contactForm: {
+                        name: 'Name',
+                        email: 'Email',
+                        message: 'Message',
+                        send: 'Send Message',
+                        required: 'All fields are required!',
+                        invalidEmail: 'Invalid email!',
+                        success: 'Your message has been sent!'
+                    }
+                }
+            },
             currentFilter: 'all',
             currentPage: 1,
             projectsPerPage: 3
         }
     },
     computed: {
+        // Get the current language texts
+        currentLangText() {
+            return this.uiText[this.language];
+        },
+        // Get the description in the current language
+        currentDescription() {
+            return this.description[this.language];
+        },
         filteredProjects() {
             // Filter berdasarkan kategori
             let filtered = this.projects;
@@ -100,6 +172,26 @@ const app = Vue.createApp({
         }
     },
     methods: {
+        changeLanguage(lang) {
+            this.language = lang;
+            // Update the language buttons UI
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.language-btn[onclick="changeLanguage('${lang}')"]`).classList.add('active');
+        },
+        // Method to get the project title in the current language
+        getProjectTitle(project) {
+            return typeof project.title === 'object' ? project.title[this.language] : project.title;
+        },
+        // Method to get the project description in the current language
+        getProjectDescription(project) {
+            return typeof project.description === 'object' ? project.description[this.language] : project.description;
+        },
+        // Method to get the project date in the current language
+        getProjectDate(project) {
+            return typeof project.date === 'object' ? project.date[this.language] : project.date;
+        },
         filterProjects(category) {
             this.currentFilter = category;
             this.currentPage = 1; // Reset ke halaman pertama saat mengganti filter
@@ -148,6 +240,11 @@ const app = Vue.createApp({
         }
     }
 }).mount('#app');
+
+// Expose the changeLanguage method globally for the navbar buttons
+window.changeLanguage = function(lang) {
+    app.changeLanguage(lang);
+};
 
 // Animasi ketik untuk nama
 document.addEventListener('DOMContentLoaded', function() {
@@ -243,19 +340,23 @@ if (contactForm) {
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
         
+        // Get current language for error messages
+        const currentLang = app.language;
+        const errorMessages = app.uiText[currentLang].contactForm;
+        
         // Validasi sederhana
         if (!name || !email || !message) {
-            alert('Semua bidang harus diisi!');
+            alert(errorMessages.required);
             return;
         }
         
         if (!validateEmail(email)) {
-            alert('Email tidak valid!');
+            alert(errorMessages.invalidEmail);
             return;
         }
         
         // Kirim formulir (di sini Anda akan menambahkan kode untuk mengirim data)
-        alert('Pesan Anda telah dikirim!');
+        alert(errorMessages.success);
         contactForm.reset();
     });
 }
@@ -264,6 +365,7 @@ function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+
 // Loading screen logic
 window.addEventListener('load', function() {
     // Hide loading screen after everything is loaded
