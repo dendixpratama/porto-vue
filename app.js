@@ -139,7 +139,10 @@ const app = Vue.createApp({
             },
             currentFilter: 'all',
             currentPage: 1,
-            projectsPerPage: 3
+            projectsPerPage: 3,
+            secretCode: '',
+            targetCode: 'diffa',
+            showEasterEgg: false
         }
     },
     computed: {
@@ -171,6 +174,18 @@ const app = Vue.createApp({
             return Math.ceil(filtered.length / this.projectsPerPage);
         }
     },
+    created() {
+        // Tambahkan event listener untuk mendeteksi ketika pengguna mengetik
+        window.addEventListener('keydown', this.handleKeyDown);
+        
+        // Tambahkan komentar HTML yang akan terlihat di tab Elements
+        const commentNode = document.createComment(' Easter Egg: Ketik nama pasangan saat ini untuk menemukan kejutan! ');
+        document.body.appendChild(commentNode);
+      },
+      beforeDestroy() {
+        // Hapus event listener ketika komponen dihancurkan
+        window.removeEventListener('keydown', this.handleKeyDown);
+      },
     methods: {
         changeLanguage(lang) {
             this.language = lang;
@@ -237,7 +252,29 @@ const app = Vue.createApp({
             };
             
             return iconMap[tech] || 'fas fa-code';
+        },
+         // Easter Egg Method
+         handleKeyDown(event) {
+            // console.log('Key pressed:', event.key);
+        
+            this.secretCode += event.key.toLowerCase();
+        
+            // Batasi panjang secretCode agar tidak melebihi targetCode
+            if (this.secretCode.length > this.targetCode.length) {
+                this.secretCode = this.secretCode.slice(-this.targetCode.length);
+            }
+        
+            // console.log('Current secret code:', this.secretCode);diffa
+        
+            if (this.secretCode === this.targetCode) {
+                this.showEasterEgg = true;
+                setTimeout(() => {
+                    this.showEasterEgg = false;
+                    this.secretCode = '';
+                }, 3000);
+            }
         }
+        
     }
 }).mount('#app');
 
