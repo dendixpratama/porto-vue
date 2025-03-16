@@ -324,9 +324,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({
-            behavior: 'smooth'
-        });
+        
+        // Skip empty anchors or links that are just "#"
+        if (targetId === "#") return;
+        
+        // Try to find the element
+        const targetElement = document.querySelector(targetId);
+        
+        // Only scroll if the element exists
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
